@@ -1,4 +1,6 @@
 .idea
+.history/
+.ipynb_checkpoints/
 .DS_Store
 ref
 asap-aes/
