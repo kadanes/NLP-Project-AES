@@ -2,6 +2,14 @@ from requirements_base import *
 from requirements_feature import *
 from requirements_key import *
 from requirements_frame import *
+from prompts_reader import set_prompts
+
+
+def get_all_classifiers():
+    linr = LinearRegression()
+    svm = SVC(kernel="linear", C=0.025)
+    knn = KNeighborsClassifier(10)
+    return [linr, svm, knn]
 
 def create_word_vecs(X, wv_model, num_features, essay_wordvecs):
     essay_vectors = {}
@@ -12,7 +20,7 @@ def create_word_vecs(X, wv_model, num_features, essay_wordvecs):
     X_vec = pd.DataFrame.from_dict(essay_vectors, orient="index")
     return X_vec, essay_wordvecs 
 
-def create_sim_from_word_vecs(X, wv_model, num_features, essay_wordvecs):
+def create_sim_from_word_vecs(X, data, wv_model, num_features, essay_wordvecs):
     essay_vec_sim = {}
     for idx in X.index.values:
         essay_words = X.loc[idx][sentences_key]
@@ -31,7 +39,7 @@ def create_sim_from_word_vecs(X, wv_model, num_features, essay_wordvecs):
     X_vec_sim = pd.DataFrame.from_dict(essay_vec_sim, orient="index")
     return X_vec_sim
 
-def evaluate(X, y, model = LinearRegression(), plot=False, wordvec=False, num_features=300, min_word_count=40, context=10, lsa=False, wordvec_sim=False):
+def evaluate(X, y, data=None, model = LinearRegression(), plot=False, wordvec=False, num_features=300, min_word_count=40, context=10, lsa=False, wordvec_sim=False):
   
     X = X.dropna(axis=1, inplace=False)
 
@@ -62,8 +70,8 @@ def evaluate(X, y, model = LinearRegression(), plot=False, wordvec=False, num_fe
                 
                 if wordvec_sim:
                    
-                    X_train_vec_sim = create_sim_from_word_vecs(X_train, wv_model, num_features, essay_wordvecs)                    
-                    X_test_vec_sim = create_sim_from_word_vecs(X_test, wv_model, num_features, essay_wordvecs)         
+                    X_train_vec_sim = create_sim_from_word_vecs(X_train, data, wv_model, num_features, essay_wordvecs)                    
+                    X_test_vec_sim = create_sim_from_word_vecs(X_test, data, wv_model, num_features, essay_wordvecs)         
                     X_train = X_train.join(X_train_vec_sim)
                     X_test = X_test.join(X_test_vec_sim)
                     
@@ -112,6 +120,6 @@ def evaluate(X, y, model = LinearRegression(), plot=False, wordvec=False, num_fe
 
         dateTimeObj = datetime.now()
         timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
-        plt.savefig("./figs/" + model_name + "-" +timestampStr + ".png")
-        
+        plt.savefig("../figs/" + model_name + "-" +timestampStr + ".png")
+                
     return np.array(results).mean(), model
