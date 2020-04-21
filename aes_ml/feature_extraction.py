@@ -1,8 +1,7 @@
 from requirements_base import *
 from requirements_key import *
 
-tagger=PerceptronTagger()
-tool = language_check.LanguageTool('en-US')
+tagger = PerceptronTagger()
 spell = SpellChecker()
 spell.word_frequency.load_words(["PERSON", "ORGANIZATION", "LOCATION", "DATE", "TIME", "MONEY", "PERCENT", "CAPS"])
 stemmer = PorterStemmer()
@@ -11,7 +10,7 @@ word_to_idx = [{}, {}, {}, {}]
 idx_to_word = [{}, {}, {}, {}]
 
 # Process words of essays
-def sentence_to_word_list(sentence, remove_stopwords, set_no):
+def sentence_to_word_list(sentence, ignore_stopwords, set_no):
     global max_idx
     global word_to_idx
     global idx_to_word
@@ -61,7 +60,7 @@ def sentence_to_word_list(sentence, remove_stopwords, set_no):
         kept_words.append(word)
         
         isStopword = word in stops
-        process_word = (remove_stopwords and not isStopword) or (not remove_stopwords) 
+        process_word = (ignore_stopwords and not isStopword) or (not ignore_stopwords) 
         if process_word:
             set_idx = set_no - 3
             if set_idx >= 0 and set_idx <= 3:
@@ -97,9 +96,8 @@ def sentence_to_word_list(sentence, remove_stopwords, set_no):
 
 
 # Process sentences of essays
-def essay_to_sentences(essay, set_no, remove_stopwords = False):
-    tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-    sentences = tokenizer.tokenize(essay.strip())
+def essay_to_sentences(essay, set_no, ignore_stopwords=False):
+    sentences = sent_tokenize(essay.strip())
     split_sentences = []
     split_words = []
     
@@ -126,21 +124,23 @@ def essay_to_sentences(essay, set_no, remove_stopwords = False):
     nouns_count = 0
     adjectives_count = 0
  
-    all_words = nltk.word_tokenize(essay)
-    count= Counter([j for i,j in tagger.tag(all_words)])
-    verbs_count = count['VB'] + count['VBG'] + count['VBP'] + count['VBN'] + count['VBZ']
-    adverbs_count = count['RB'] + count['RBR'] + count['RBS']
-    nouns_count = count['NN'] + count['NNS'] + count['NNPS'] + count['NNP']
-    adjectives_count = count['JJ'] + count['JJR'] 
+    all_words = word_tokenize(essay)
+    pos_count = Counter([tag for word, tag in tagger.tag(all_words)])
+    # print("Tag count: ", count)
 
-    punctuation = ['.','?', '!', ':', ';']
-    for punct in punctuation:
-        punctuation_count += essay.count(punct)
+    nouns_count = pos_count.get("NN", 0) + pos_count.get("NNS", 0) + pos_count.get("NNP", 0) + pos_count.get("NNPS", 0)
+    adjectives_count = pos_count.get("JJ", 0) + pos_count.get("JJR", 0) #+ pos_count.get("JJS", 0)
+    verbs_count = pos_count.get("VB", 0) + pos_count.get("VBG", 0) + pos_count.get("VBN", 0) + pos_count.get("VBP", 0) + pos_count.get("VBZ", 0)# + pos_count.get('VBD', 0)
+    adverbs_count = pos_count.get("RB", 0) + pos_count.get("RBR", 0) + pos_count.get("RBS", 0)
+
+    punctuatios = ['?', '.', ':', ';', '!']
+    for punctuation in punctuatios:
+        punctuation_count += essay.count(punctuation)
     
     for sentence in sentences:
         if len(sentence) > 0:
             sentence = re.sub("[^a-zA-Z]", " ", sentence)
-            kept_words, features, extra_features = sentence_to_word_list(sentence, remove_stopwords, set_no)
+            kept_words, features, extra_features = sentence_to_word_list(sentence, ignore_stopwords, set_no)
             split_sentences.append(kept_words)
             split_words.extend(kept_words)
             
@@ -189,24 +189,23 @@ def essay_to_sentences(essay, set_no, remove_stopwords = False):
     return (split_words, split_sentences, features, extra_features)
 
 # Generate the average word vector representation of a word list
-def get_avg_word_vec(words, model, num_features):
-    featureVec = np.zeros((num_features,),dtype="float32")
-    nwords = 0.
+def get_avg_word_vec(words, model, wv_size):
+    wordvec = np.zeros((wv_size,),dtype="float32")
+    word_count = 0.
     index2word_set = set(model.wv.index2word)
     for word in words:
         if word in index2word_set: 
-            nwords += 1.
-            featureVec = np.add(featureVec, model[word])        
-    featureVec = np.divide(featureVec, nwords)
-    return featureVec
+            word_count += 1.
+            wordvec = np.add(wordvec, model[word])        
+    wordvec = np.divide(wordvec, word_count)
+    return wordvec
 
 # Generate the word vector representation for paragraphs from essay prompt
-def get_prompt_word_vecs(prompt, model, num_features):
+def get_prompt_word_vecs(prompt, model, wv_size):
     whole_prompt_words = []
     vectors = []
     for para in prompt:
-        tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-        sentences = tokenizer.tokenize(para.strip())
+        sentences = sent_tokenize(para.strip())
         para_words = []
         for sentence in sentences:
             if len(sentence) > 0:
@@ -214,8 +213,8 @@ def get_prompt_word_vecs(prompt, model, num_features):
                 words = sentence.lower().split()
                 para_words.extend(words)
                 whole_prompt_words.extend(words)
-        vectors.append(get_avg_word_vec(para_words, model, num_features))
-    vectors.append(get_avg_word_vec(whole_prompt_words, model, num_features))
+        vectors.append(get_avg_word_vec(para_words, model, wv_size))
+    vectors.append(get_avg_word_vec(whole_prompt_words, model, wv_size))
     return vectors
 
 # Generate the word count vector for a word list
@@ -234,8 +233,7 @@ def get_prompt_vectors(prompt, set_no):
     whole_prompt_words = []
     vectors = []
     for para in prompt:
-        tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-        sentences = tokenizer.tokenize(para.strip())
+        sentences = sent_tokenize(para.strip())
         para_words = []
         for sentence in sentences:
             if len(sentence) > 0:

@@ -67,15 +67,21 @@ def split_in_sets(data, base_min_scores, base_max_scores):
     essay_sets = []
     min_scores = []
     max_scores = []
+    grade = [8, 10, 10, 10, 8, 10, 7, 10]
+    prompt_types = ["PNR", "SDR"]
+    set_type_id = [0, 0, 1, 1, 1, 1, 0, 0]
+    print("Set", "Count", "Attributes", "Score Range", "Grade", "Type", sep="\t")
     for s in range(1,9):
         essay_set = data[data["essay_set"] == s]
         essay_set.dropna(axis=1, inplace=True)
         n, d = essay_set.shape
         set_scores = essay_set["domain1_score"]
         mis, mas = base_min_scores[s-1], base_max_scores[s-1]
-        print ("Set", s, ": Essays = ", n , "\t Attributes = ", d, end = "") 
-        print("\t Score Range = [", mis, ",", mas, "]", sep='')
+        print(s, n, d, end="", sep="\t")
+        print("\t\t[", mis, ",", mas, "]", sep='', end="")
+        print("\t\t", grade[s-1], "th\t", prompt_types[set_type_id[s-1]], sep="")
         min_scores.append(set_scores.min())
         max_scores.append(set_scores.max())
         essay_sets.append(essay_set)
+    print("\nPNR: Persuasive / Narrative  / Expository \t SDR: Source Dependent Responses")
     return (essay_sets, min_scores, max_scores)

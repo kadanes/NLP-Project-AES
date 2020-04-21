@@ -13,12 +13,12 @@ import matplotlib.pyplot as plt
 #NLP
 import nltk
 from nltk.corpus import stopwords
-import language_check
 from spellchecker import SpellChecker
 from nltk.tag.perceptron import PerceptronTagger
 from gensim.models import word2vec
 from nltk.stem.porter import PorterStemmer
-
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
 #ML
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
