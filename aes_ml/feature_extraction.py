@@ -133,8 +133,8 @@ def essay_to_sentences(essay, set_no, ignore_stopwords=False):
     verbs_count = pos_count.get("VB", 0) + pos_count.get("VBG", 0) + pos_count.get("VBN", 0) + pos_count.get("VBP", 0) + pos_count.get("VBZ", 0)# + pos_count.get('VBD', 0)
     adverbs_count = pos_count.get("RB", 0) + pos_count.get("RBR", 0) + pos_count.get("RBS", 0)
 
-    punctuatios = ['?', '.', ':', ';', '!']
-    for punctuation in punctuatios:
+    punctuations = ['?', '.', ':', ';', '!']
+    for punctuation in punctuations:
         punctuation_count += essay.count(punctuation)
     
     for sentence in sentences:
