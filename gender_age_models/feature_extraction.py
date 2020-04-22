@@ -7,6 +7,48 @@ Original file is located at
     https://colab.research.google.com/drive/1swVyQ8Uru2bC1-aTRi0GaNeep4qnssKp
 """
 
+def gender_summary(essays, gender_label, mcount, fcount, ecount, avg_size):
+  for idx in range(len(essays)):
+    if gender_label[idx] == 0:
+      mcount += 1
+    elif gender_label[idx] == 1:
+      fcount += 1
+    avg_size += len(essays[idx])
+  ecount += len(essays)
+  return mcount, fcount, ecount, avg_size
+
+def age_summary(essays, age, c13, c14, c15, c16, c1, c2):
+  for i in range(len(age)):
+  if age[i] == 13:
+    c13 += 1
+  elif age[i] == 14:
+    c14 += 1
+  elif age[i] == 15:
+    c15 += 1
+  elif age[i] == 16:
+    c16 += 1
+    
+  if age_label[i] == 1:
+    c1 += 1
+  elif age_label[i] == 2:
+    c2 += 1
+  return c13, c14, c15, c16, c1, c2
+
+def split_in_sets(data):
+    essay_sets = []
+    min_scores = []
+    max_scores = []
+    for s in range(1,9):
+        essay_set = data[data["essay_set"] == s]
+        essay_set.dropna(axis=1, inplace=True)
+        n, d = essay_set.shape
+        set_scores = essay_set["domain1_score"]
+        print ("Set", s, ": Essays = ", n , "\t Attributes = ", d)
+        min_scores.append(set_scores.min())
+        max_scores.append(set_scores.max())
+        essay_sets.append(essay_set)
+    return (essay_sets, min_scores, max_scores)
+
 def possessives_features(posts):
   total_dict = {}
   count_my = {}
