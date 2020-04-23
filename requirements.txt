@@ -1,0 +1,8 @@
+numpy
+pandas
+matplotlib
+nltk
+pyspellchecker
+gensim
+scikit-learn
+scipy

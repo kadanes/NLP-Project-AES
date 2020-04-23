@@ -1,3 +1,7 @@
 aes/
 __pycache__/
 .idea/
+.DS_STORE
+ref/
+.history/
+.ipynb_checkpoints/
