@@ -37,13 +37,13 @@ Besides these notebooks the other code for data preprocessing, feature extractio
 - `split_in_sets(data, base_min_scores, base_max_scores)` is used split the features dataframe by set number of the essays and display other information about each sets like prompt type.
 
 
-3. **`keys.py`:** Contains of all the keys that are used to access dataframe columns
+**3. `keys.py`:** Contains of all the keys that are used to access dataframe columns
 
 
-4. **`prompts_reader.py`:** Contains the code to load paragraphs from story for type 2 prompts from the `./prompts` directory.
+**4. `prompts_reader.py`:** Contains the code to load paragraphs from story for type 2 prompts from the `./prompts` directory.
 
 
-5. **`trainer.py`:** Contains the code to train ML models and evaluate the MQWK score accross 5 folds.
+**5. `trainer.py`:** Contains the code to train ML models and evaluate the MQWK score accross 5 folds.
 - `get_all_classifiers()` is used to get a list of clasifiers that was used in the exploration phase before Linear Regression was chosen.
 - `create_word_vecs(X, wv_model, wv_size, essay_wordvecs)` is used to generate the average word vector representations for word from essays in a dataframe.
 - `create_sim_from_word_vecs(X, data, wv_model, wv_size, essay_wordvecs)` is used to generate similarity between the essay's average word vector representation based with average word vector based representation of paragraphs from story of type 2 prompt.
