@@ -1,8 +1,3 @@
-.idea
-.history/
-.ipynb_checkpoints/
-.DS_Store
-ref
-feature_extraction\ -\ Jupyter\ Notebook.pdf
-w2v.pdf
+aes/
 __pycache__/
+.idea/
