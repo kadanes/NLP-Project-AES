@@ -53,7 +53,7 @@ Besides these notebooks the other code for data preprocessing, feature extractio
 
 
 **5. `trainer.py`:** Contains the code to train ML models and evaluate the MQWK score accross 5 folds.
-- `get_all_classifiers()` is used to get a list of clasifiers that was used in the exploration phase before Linear Regression was chosen.
+- `get_all_classifiers()` is used to get a list of classifiers that was used in the exploration phase before Linear Regression was chosen.
 - `create_word_vecs(X, wv_model, wv_size, essay_wordvecs)` is used to generate the average word vector representations for word from essays in a dataframe.
 - `create_sim_from_word_vecs(X, data, wv_model, wv_size, essay_wordvecs)` is used to generate similarity between the essay's average word vector representation based with average word vector based representation of paragraphs from story of type 2 prompt.
 - `evaluate(X, y, data=None, model = LinearRegression(), plot=False, wordvec=False, wv_size=300, min_count=30, context=10, sample=0, lsa=False, wordvec_sim=False)` is used to train the machine learning model across 5 fold cross validation and compute the value of MQWK score.
@@ -183,5 +183,22 @@ but the results there may vary.
 
 
 ### Bias analysis in grading
+**1. `feature_extraction.py`:** This file contains code for extracting features like: possessive features, POS unigrams, f-measure scores, POS bigrams, n-gram character and word level features, sentiment features and text-readability features. Also contains functions to find the dataset summaries for gender and age.
 
+**2. `preprocess.py`:**  Contains code to preprocess the data before feature extraction.
 
+**3. `requirements.py`:** Imports all modules required for executing the models.
+
+**4. `visualize.py`:** Contains functions which allow us to visualize features.
+
+**5. `age_pentel_model.sav`:** Age prediction model (SVM trained with text-readability features)
+
+**6. `ngram_model.sav and ngram_classifier_model.sav`:** Gender prediction model (Naive Bayes trained with n-grams)
+
+**7. `ngram_char_model.sav`:** Model to extract character level n-grams (optional)
+
+**8. `author_profiling.ipynb`:** Entire code (run cell by cell). This has been split into the next 2 notebooks.
+
+**9. `gender_models.ipynb`:** Gender prediction models. Shows performance on generalization dataset and analysis on ASAP dataset.
+
+**10. `age_models.ipynb`:** Age prediction models. Shows analysis on ASAP dataset.
