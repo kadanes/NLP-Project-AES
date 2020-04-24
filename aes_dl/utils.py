@@ -82,7 +82,7 @@ def build_word2vec(train_sentences, num_workers, num_features, min_word_count, c
     model.build_vocab(train_sentences, progress_per=10000)
     print('Time to build vocab using word2vec: {} sec'.format(time.time() - start_time))
     start_time = time.time()
-    model.train(train_sentences, total_examples=model.corpus_count, epochs=epochs, report_delay=1)
+    model.train(train_sentences, total_examples=model.corpus_count, epochs=30, report_delay=1)
     print('Time to train the word2vec model: {} mins'.format(time.time() - start_time))
     model.init_sims(replace=True)
     sorted_dic = sorted(top10.items(), key=lambda k: k[1], reverse=True)
