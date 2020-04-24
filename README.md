@@ -14,9 +14,9 @@ This dataset consists of essays written by students from 7th - 10th grade. The e
 ### Repository Structure
 
 The repository has been structured into 3 main folders:<br>
-1. aes_ml : Machine Learning based approaches to AES (Parth) - [Link](#AES-using-Machine-Learning-(aes_ml))<br>
-[2. aes_dl : Deep Learning based approaches to AES (Gaurav)](#AES-using-Deep-Learning-(aes_dl))<br>
-[3. gender_age_models: Bias analysis in grading (Naila)](#Bias-analysis-in-grading-(gender_age_models))<br>
+1. aes_ml : Machine Learning based approaches to AES (Parth) 
+2. aes_dl : Deep Learning based approaches to AES (Gaurav)
+3. gender_age_models: Bias analysis in grading (Naila)
 
 
 ### Installing Requirements necessary:
