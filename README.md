@@ -197,8 +197,28 @@ but the results there may vary.
 
 **7. `ngram_char_model.sav`:** Model to extract character level n-grams (optional)
 
-**8. `author_profiling.ipynb`:** Entire code (run cell by cell). This has been split into the next 2 notebooks.
+**8. `author_profiling.ipynb`:** Entire code (run cell by cell). This has been split into the next 2 notebooks. Recommended
 
 **9. `gender_models.ipynb`:** Gender prediction models. Shows performance on generalization dataset and analysis on ASAP dataset.
 
 **10. `age_models.ipynb`:** Age prediction models. Shows analysis on ASAP dataset.
+
+**To use gender_models.ipynb:** Run cell by cell
+Open the file in Google Colab.
+
+Upload the following: requirements.py, preprocess.py, visualize.py, feature_extraction.py
+
+To train the models: Upload train.json (https://drive.google.com/file/d/1rTiQQHkEAyf7of6iZ8GRXHA_IQgGsnjr/view?usp=sharing)
+
+To check if the model generalizes well: Upload blog-gender-dataset.csv (present in the Dataset folder). Upload ngram_model.sav and ngram_classifier_model.sav
+
+To check model's performance on HP dataset: Upload training_set_rel3.tsv (in asap-aes folder). Upload ngram_model.sav and ngram_classifier_model.sav
+
+**To use age_models.ipynb:** Run cell by cell
+Open the file in Google Colab.
+
+Upload the following: requirements.py, preprocess.py, visualize.py, feature_extraction.py
+
+To train the models: Upload train.json (https://drive.google.com/file/d/1rTiQQHkEAyf7of6iZ8GRXHA_IQgGsnjr/view?usp=sharing)
+
+To check model's performance on HP dataset: Upload training_set_rel3.tsv (in asap-aes folder). Upload age_pentel_model.sav
