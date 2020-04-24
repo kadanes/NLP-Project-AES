@@ -35,7 +35,9 @@ pip install -r requirements.txt
 
 
 
-This folder has 2 notebooks that have the results. `aes_ml_exploration.ipynb` is the notebook that has all the exploration we did. It includes hyperparameter tuning along with the results. `aes_ml_results.ipynb` has the final results that were presented in the paper. Hence to get the final results from the paper please **run all cells in `aes_ml_results.ipynb`**
+This folder has 2 notebooks that have the results. `aes_ml_exploration.ipynb` is the notebook that has all the exploration we did. It includes hyperparameter tuning along with the results. `aes_ml_results.ipynb` has the final results that were presented in the paper. Hence to get the final results from the paper please **run all cells in `aes_ml_results.ipynb`**. 
+
+Please note that some results that involve word2vec based features might be slightly different due to various randomness factors. The `aes_ml_results.ipynb` notebook currently has the output values that were reported in the final paper.
 
 Besides these notebooks the other code for data preprocessing, feature extraction, data frame generation and training has been split in to various python files.
 
