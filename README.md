@@ -16,6 +16,15 @@ The repository has been structured into 3 main folders:
 3. gender_age_models: Bias analysis in grading (Naila)
 
 
+### Installing Requirements necessary:
+
+In order to install all the libraries needed to run this project, please run requirements.txt using:
+
+```
+pip install -r requirements.txt
+
+```
+
 ### AES using Machine Learning (aes_ml)
 
 This folder has 2 notebooks that have the results. `aes_ml_exploration.ipynb` is the notebook that has all the exploration we did. It includes hyperparameter tuning along with the results. `aes_ml_results.ipynb` has the final results that were presented in the paper. Hence to get the final results from the paper please **run all cells in `aes_ml_results.ipynb`**
@@ -87,6 +96,14 @@ Currently the models were trained in keras(tensorflow as backend).
 
 I would recommend using google collab or better if you have GPU access. If you are running this locally then
 follow the instructions:
+
+* Go the directory aes_dl and run all the following steps from that directory:
+
+```
+
+cd ./NLP-Project-AES/aes_dl
+
+```
 
 * Install virtual environment using:
 
