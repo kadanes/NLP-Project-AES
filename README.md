@@ -3,6 +3,8 @@ Course project for CS 7650 NLP (Georiga Tech)
 
 Project presentation video: https://youtu.be/ZQ4pyrMSCgg
 
+Project presentation link: https://docs.google.com/presentation/d/1ukMXqZSapifteOXo2_41qRhCeIfxrqMVGWkcocSn79I/edit?usp=sharing
+
 ### ASAP Dataset
 
 We used the Automated Student Assessment Prize (ASAP) datasetby The Hewlett Foundation.  (Hewlett, 2012:  ac-cessed March 12, 2020) 
