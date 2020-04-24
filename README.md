@@ -8,15 +8,15 @@ Project presentation link: https://docs.google.com/presentation/d/1ukMXqZSapifte
 ### ASAP Dataset
 
 We used the Automated Student Assessment Prize (ASAP) datasetby The Hewlett Foundation.  (Hewlett, 2012:  ac-cessed March 12, 2020) 
-This dataset consists of essays written by students from 7th - 10th grade. The essays are divided into 8 sets. Each set has a prompt associated with it. There are 2 types of prompts Type 1: Persuasive / Narrative / ExpositoryType 2: Source Dependent Responses. The first type of prompt asks students to state their opinion about certain topic.  The second type of prompt has a required reading associated with it and the students are expected to answer a question basedon their understanding of this reading. Different prompts have been graded by different number of graders. But each set has a domain 1 score, which is the combined total score.
+This dataset consists of essays written by students from 7th - 10th grade. The essays are divided into 8 sets. Each set has a prompt associated with it. There are 2 types of prompts Type 1: Persuasive / Narrative / Expository Type 2: Source Dependent Responses. The first type of prompt asks students to state their opinion about certain topic.  The second type of prompt has a required reading associated with it and the students are expected to answer a question basedon their understanding of this reading. Different prompts have been graded by different number of graders. But each set has a domain 1 score, which is the combined total score.
 
 
 ### Repository Structure
 
-The repository has been structured into 3 main folders:
-1. aes_ml : Machine Learning based approaches to AES (Parth)
-2. aes_dl : Deep Learning based approaches to AES (Gaurav)
-3. gender_age_models: Bias analysis in grading (Naila)
+The repository has been structured into 3 main folders:<br>
+1. aes_ml : Machine Learning based approaches to AES (Parth) - [Link](#AES-using-Machine-Learning-(aes_ml))<br>
+[2. aes_dl : Deep Learning based approaches to AES (Gaurav)](#AES-using-Deep-Learning-(aes_dl))<br>
+[3. gender_age_models: Bias analysis in grading (Naila)](#Bias-analysis-in-grading-(gender_age_models))<br>
 
 
 ### Installing Requirements necessary:
@@ -28,6 +28,12 @@ pip install -r requirements.txt
 ```
 
 ### AES using Machine Learning (aes_ml)
+
+<br>
+
+<img src="https://github.com/parthv21/NLP-Project-AES/blob/master/figs/aes_ml.png" width="600" alt="ML Architecture for AES"/>
+
+
 
 This folder has 2 notebooks that have the results. `aes_ml_exploration.ipynb` is the notebook that has all the exploration we did. It includes hyperparameter tuning along with the results. `aes_ml_results.ipynb` has the final results that were presented in the paper. Hence to get the final results from the paper please **run all cells in `aes_ml_results.ipynb`**
 
@@ -78,9 +84,6 @@ Besides these files, all the imports have been defined in python files that have
 The code in this section is exploration of different deep learning techniques on individual sets and on whole dataset.
 
 <img src="https://github.com/parthv21/NLP-Project-AES/blob/master/figs/arch.png" width="800" alt="DL Architecture for AES"/>
-
-
-
 
  
 #### So what did we try:
@@ -189,7 +192,7 @@ but the results there may vary.
 
 
 
-### Bias analysis in grading
+### Bias analysis in grading (gender_age_models)
 **1. `feature_extraction.py`:** This file contains code for extracting features like: possessive features, POS unigrams, f-measure scores, POS bigrams, n-gram character and word level features, sentiment features and text-readability features. Also contains functions to find the dataset summaries for gender and age.
 
 **2. `preprocess.py`:**  Contains code to preprocess the data before feature extraction.
