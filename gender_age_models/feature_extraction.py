@@ -21,7 +21,7 @@ def gender_summary(essays, gender_label, mcount, fcount, ecount, avg_size):
   ecount += len(essays)
   return mcount, fcount, ecount, avg_size
 
-def age_summary(essays, age, c13, c14, c15, c16, c1, c2):
+def age_summary(essays, age, age_label, c13, c14, c15, c16, c1, c2):
   for i in range(len(age)):
     if age[i] == 13:
       c13 += 1
@@ -383,3 +383,50 @@ def extract_features(essays, age):
     features.append(f)
     age_label.append(age[essays.index(e)])
   return features, age_label
+
+def pentel_features(essays):
+  features = []
+  age_label = []
+  for e in essays:
+    n_words = len(e)
+
+    if e == []:
+      continue
+    complex_words = 0
+    syllables = 0
+    n_chars = 0
+    n1 = 0
+    n2 = 0
+    n3 = 0
+    n4 = 0
+    n5 = 0
+    n6 = 0
+    n7 = 0
+    n8 = 0
+
+    for word in e:
+      syl = dic.inserted(word)
+      syllables += syl.count('-') 
+      sc = syl.count('-')
+      if sc > 2:
+        complex_words += 1
+      if sc == 1:
+        n1 += 1
+      if sc == 2:
+        n2 += 1
+      if sc == 3:
+        n3 += 1
+      if sc == 4:
+        n4 += 1
+      if sc == 5:
+        n5 += 1
+      if sc == 6:
+        n6 += 1
+      if sc == 7:
+        n7 += 1
+      if sc == 8:
+        n8 += 1
+      n_chars += len(word)
+    f = [n_chars/n_words, n_words, complex_words/n_words, syllables/n_words, n1/n_words, n2/n_words, n3/n_words, n4/n_words, n5/n_words, n6/n_words, n7/n_words, n8/n_words]
+    features.append(f)
+  return features
