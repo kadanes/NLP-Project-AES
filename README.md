@@ -1,6 +1,7 @@
 # NLP-Project-AES
 Course project for CS 7650 NLP (Georiga Tech)
 
+Project presentation video: https://youtu.be/ZQ4pyrMSCgg
 
 ### ASAP Dataset
 
@@ -22,7 +23,6 @@ In order to install all the libraries needed to run this project, please run req
 
 ```
 pip install -r requirements.txt
-
 ```
 
 ### AES using Machine Learning (aes_ml)
@@ -74,6 +74,11 @@ Besides these files, all the imports have been defined in python files that have
 ###  AES using Deep Learning (aes_dl)
 
 The code in this section is exploration of different deep learning techniques on individual sets and on whole dataset.
+
+<img src="https://github.com/parthv21/NLP-Project-AES/blob/master/figs/arch.png" width="800" alt="DL Architecture for AES"/>
+
+
+
 
  
 #### So what did we try:
